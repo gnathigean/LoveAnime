@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoveAnime — Assista Seus Animes Favoritos</title>
+  <meta name="description"
+    content="LoveAnime é a plataforma perfeita para descobrir, explorar e acompanhar os melhores animes. Catálogo completo com dados do MyAnimeList.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+
+<body>
+
+  <div class="app-layout">
+
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="sidebar">
+      <div class="sidebar-logo" title="LoveAnime">L</div>
+
+      <nav class="sidebar-nav">
+        <button class="sidebar-btn active" data-view="home" title="Início">
+          <i class="fas fa-house"></i>
+        </button>
+        <button class="sidebar-btn" data-view="browse" title="Explorar">
+          <i class="fas fa-compass"></i>
+        </button>
+        <button class="sidebar-btn" data-view="favorites" title="Favoritos">
+          <i class="fas fa-heart"></i>
+          <span class="badge" id="favBadge" style="display:none">0</span>
+        </button>
+        <button class="sidebar-btn" data-view="trending" title="Em Alta">
+          <i class="fas fa-fire"></i>
+        </button>
+        <button class="sidebar-btn" title="Calendário">
+          <i class="fas fa-calendar-days"></i>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button class="sidebar-btn" title="Configurações">
+          <i class="fas fa-gear"></i>
+        </button>
+        <div class="sidebar-avatar">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=LoveAnime" alt="Avatar">
+        </div>
+      </div>
+    </aside>
+
+    <!-- ====== MAIN CONTENT ====== -->
+    <main class="main-content">
+
+      <!-- ---- Header ---- -->
+      <header class="header">
+        <nav class="header-nav">
+          <a href="#" class="active" data-view="home">Home</a>
+          <a href="#" data-view="browse">Explorar</a>
+          <a href="#" data-view="favorites">Favoritos</a>
+          <a href="#">Gêneros</a>
+          <a href="#">Temporada</a>
+        </nav>
+
+        <div class="header-right">
+          <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Buscar animes..." autocomplete="off">
+          </div>
+          <button class="header-icon-btn" title="Notificações">
+            <i class="fas fa-bell"></i>
+          </button>
+          <div class="header-avatar">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=LoveAnime" alt="Avatar">
+          </div>
+        </div>
+      </header>
+
+      <!-- ====== HOME VIEW ====== -->
+      <div class="home-view" id="homeView">
+
+        <!-- Hero Section -->
+        <section class="hero" id="heroSection">
+          <div class="hero-bg">
+            <img id="heroBg" src="" alt="Hero Background">
+          </div>
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <div class="hero-badge">
+              <span class="dot"></span>
+              <span>LoveAnime Original</span>
+            </div>
+            <h1 class="hero-title" id="heroTitle">Carregando...</h1>
+            <div class="hero-meta" id="heroMeta"></div>
+            <p class="hero-desc" id="heroDesc"></p>
+            <div class="hero-actions">
+              <a class="btn-play" id="heroPlayBtn" href="#" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+                <span>Assistir</span>
+              </a>
+              <button class="btn-icon" id="heroFavBtn" title="Adicionar aos Favoritos">
+                <i class="fas fa-plus"></i>
+              </button>
+              <button class="btn-icon" id="heroInfoBtn" title="Mais Informações">
+                <i class="fas fa-circle-info"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Em Alta -->
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">🔥 Em Alta</h2>
+            <span class="section-more" data-view="browse">Ver Todos →</span>
+          </div>
+          <div class="anime-row" id="trendingRow">
+            <!-- Skeleton loaders -->
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Esta Temporada -->
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">🌸 Esta Temporada</h2>
+            <span class="section-more" data-view="browse">Ver Todos →</span>
+          </div>
+          <div class="anime-row" id="seasonRow">
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Top de Todos os Tempos -->
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">👑 Top de Todos os Tempos</h2>
+            <span class="section-more" data-view="browse">Ver Todos →</span>
+          </div>
+          <div class="anime-row" id="topRow">
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Filmes Populares -->
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">🎬 Filmes Populares</h2>
+            <span class="section-more" data-view="browse">Ver Todos →</span>
+          </div>
+          <div class="anime-row" id="moviesRow">
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton-img"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text-sm"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ====== BROWSE VIEW ====== -->
+      <div class="browse-view" id="browseView">
+        <section class="section" style="padding-top:8px">
+          <div class="section-header">
+            <h2 class="section-title">Explorar Animes</h2>
+          </div>
+          <div class="browse-filters" id="genreFilters">
+            <button class="filter-btn active" data-genre="">Todos</button>
+            <button class="filter-btn" data-genre="1">Action</button>
+            <button class="filter-btn" data-genre="2">Adventure</button>
+            <button class="filter-btn" data-genre="4">Comedy</button>
+            <button class="filter-btn" data-genre="8">Drama</button>
+            <button class="filter-btn" data-genre="10">Fantasy</button>
+            <button class="filter-btn" data-genre="14">Horror</button>
+            <button class="filter-btn" data-genre="7">Mystery</button>
+            <button class="filter-btn" data-genre="22">Romance</button>
+            <button class="filter-btn" data-genre="24">Sci-Fi</button>
+            <button class="filter-btn" data-genre="36">Slice of Life</button>
+            <button class="filter-btn" data-genre="30">Sports</button>
+            <button class="filter-btn" data-genre="37">Supernatural</button>
+          </div>
+          <div class="anime-grid" id="browseGrid">
+            <div class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ====== FAVORITES VIEW ====== -->
+      <div class="favorites-view" id="favoritesView">
+        <section class="section" style="padding-top:8px">
+          <div class="section-header">
+            <h2 class="section-title">❤️ Meus Favoritos</h2>
+          </div>
+          <div class="anime-grid" id="favoritesGrid">
+            <div class="favorites-empty" id="favoritesEmpty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+              <h3>Nenhum favorito ainda</h3>
+              <p>Explore e adicione animes aos seus favoritos!</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ====== SEARCH VIEW ====== -->
+      <div class="search-view" id="searchView">
+        <section class="section" style="padding-top:8px">
+          <h2 class="search-query-title" id="searchTitle">Resultados para "<span></span>"</h2>
+          <div class="anime-grid" id="searchGrid">
+            <div class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ====== DETAIL VIEW ====== -->
+      <div class="detail-view" id="detailView">
+        <section class="detail-hero">
+          <div class="hero-bg">
+            <img id="detailBg" src="" alt="">
+          </div>
+          <div class="hero-overlay"></div>
+          <div class="detail-content">
+            <div class="detail-poster">
+              <img id="detailPoster" src="" alt="">
+            </div>
+            <div class="detail-info">
+              <div class="detail-back" id="detailBack">
+                <i class="fas fa-arrow-left"></i> Voltar
+              </div>
+              <h1 class="detail-title" id="detailTitle"></h1>
+              <div class="detail-meta" id="detailMeta"></div>
+              <div class="detail-genres" id="detailGenres"></div>
+              <p class="detail-synopsis" id="detailSynopsis"></p>
+              <div class="hero-actions" style="margin-top: 20px;">
+                <button class="btn-play" id="detailPlayBtn" onclick="playFirstEpisode()">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  <span>Assistir Ep 1</span>
+                </button>
+                <button class="btn-icon" id="detailFavBtn" title="Favoritar">
+                  <i class="fas fa-heart"></i>
+                </button>
+                <a class="btn-icon" id="detailMalBtn" href="#" target="_blank" title="Ver no MAL">
+                  <i class="fas fa-external-link-alt"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="detail-episodes-section">
+          <section class="section" style="padding-left:0;padding-right:0">
+            <div class="section-header">
+              <h2 class="section-title">Episódios</h2>
+            </div>
+            <div class="episodes-row" id="episodesRow">
+              <div class="loading">
+                <div class="spinner"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ====== VIDEO PLAYER MODAL ====== -->
+  <div class="player-modal" id="playerModal">
+    <div class="player-header">
+      <div class="player-header-left">
+        <button class="player-back-btn" id="playerCloseBtn" title="Fechar">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="player-title-info">
+          <h3 id="playerTitle">Carregando...</h3>
+          <span id="playerSubtitle">Episódio 1</span>
+        </div>
+      </div>
+      <div class="player-header-right">
+        <div class="player-audio-toggle">
+          <button class="audio-btn active" data-category="sub" title="Legendado">SUB</button>
+          <button class="audio-btn" data-category="dub" title="Dublado">DUB</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="player-body">
+      <div class="player-video-area">
+        <div class="player-loading" id="playerLoading">
+          <div class="spinner"></div>
+          <p>Carregando episódio...</p>
+        </div>
+        <video id="videoPlayer" controls crossorigin="anonymous" playsinline></video>
+        <button class="skip-intro-btn" id="skipIntroBtn" style="display:none">Pular Intro →</button>
+        <button class="skip-outro-btn" id="skipOutroBtn" style="display:none">Próximo Episódio →</button>
+      </div>
+
+      <div class="player-episodes-panel" id="playerEpisodesPanel">
+        <div class="panel-header">
+          <h4>Episódios</h4>
+          <button class="panel-toggle" id="panelToggle" title="Fechar lista">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+        <div class="panel-episodes-list" id="panelEpisodesList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation (Mobile) -->
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item active" data-view="home">
+      <i class="fas fa-home"></i>
+      <span>Início</span>
+    </a>
+    <a href="#" class="nav-item" data-view="browse" onclick="state.browseGenre=''; loadBrowse()">
+      <i class="fas fa-compass"></i>
+      <span>Explorar</span>
+    </a>
+    <a href="#" class="nav-item" data-view="search" onclick="$('#searchInput').focus()">
+      <i class="fas fa-search"></i>
+      <span>Buscar</span>
+    </a>
+    <a href="#" class="nav-item" data-view="favorites">
+      <i class="fas fa-heart"></i>
+      <span>Favoritos</span>
+    </a>
+  </nav>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

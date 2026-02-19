@@ -1,0 +1,11 @@
+node_modules/
+.env
+*.log
+.DS_Store
+dist/
+aniwatch-api/node_modules/
+aniwatch-api/dist/
+aniwatch-api/.env
+.system_generated/
+.tempmediaStorage/
+/brain/
